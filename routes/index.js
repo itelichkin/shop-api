@@ -22,6 +22,27 @@ module.exports = function (app) {
         }
     });
 
+    app.get('/pizza', async function (req, res, next) {
+        const id = req.query.id;
+        let object;
+        try {
+            object = await database.pizzas.getPizzaById(id);
+            res.send(object)
+        } catch (e) {
+            next(e)
+        }
+    });
+
+    app.post('/pizza', async function (req, res, next) {
+        let object;
+        try {
+            object = await database.pizzas.editPizzaById(req.body);
+            res.send({modify: !!object});
+        } catch (e) {
+            next(e)
+        }
+    });
+
     app.delete('/pizza', async function (req, res, next) {
         const id = req.query.id;
         let status;
@@ -48,6 +69,27 @@ module.exports = function (app) {
         try {
             sweets = await database.sweets.getSweets();
             res.send(sweets)
+        } catch (e) {
+            next(e)
+        }
+    });
+
+    app.get('/sweet', async function (req, res, next) {
+        const id = req.query.id;
+        let object;
+        try {
+            object = await database.sweets.getSweetById(id);
+            res.send(object)
+        } catch (e) {
+            next(e)
+        }
+    });
+
+    app.post('/sweet', async function (req, res, next) {
+        let object;
+        try {
+            object = await database.sweets.editSweetById(req.body);
+            res.send({modify: !!object});
         } catch (e) {
             next(e)
         }
@@ -81,6 +123,27 @@ module.exports = function (app) {
         try {
             iceCreams = await database.iceCreams.getIceCreams();
             res.send(iceCreams)
+        } catch (e) {
+            next(e)
+        }
+    });
+
+    app.get('/ice-cream', async function (req, res, next) {
+        const id = req.query.id;
+        let object;
+        try {
+            object = await database.iceCreams.getIceCreamById(id);
+            res.send(object)
+        } catch (e) {
+            next(e)
+        }
+    });
+
+    app.post('/ice-cream', async function (req, res, next) {
+        let object;
+        try {
+            object = await database.iceCreams.editIceCreamById(req.body);
+            res.send({modify: !!object});
         } catch (e) {
             next(e)
         }

@@ -139,6 +139,42 @@ pizzaSchema.statics.getPizzas = function () {
     });
 };
 
+pizzaSchema.statics.getPizzaById = function (id) {
+    return new Promise((resolve, reject) => {
+        let object;
+        PizzaDataSchema.findOne({_id: id}, function (err, data) {
+            if (err) {
+                return new Error(err)
+            } else {
+                object = generatePizzaData(data);
+            }
+            resolve(object)
+        });
+    });
+};
+
+pizzaSchema.statics.editPizzaById = function (data) {
+    return new Promise((resolve, reject) => {
+        let result;
+        PizzaDataSchema.findOne({_id: data.id}, function (err, object) {
+            if (err) {
+                return new Error(err)
+            } else {
+                for (const key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        if ((key !== 'id' || key !== '_id') && !!object[key] && key !== 'type') {
+                            object[key] = data[key];
+                        }
+                    }
+                }
+                object.save();
+                result = true;
+            }
+            resolve(result)
+        });
+    });
+};
+
 pizzaSchema.statics.removePizza = async function (id) {
     return new Promise(async (resolve, reject) => {
         PizzaDataSchema.findOne({_id: id}, function (err, pizza) {
@@ -170,7 +206,8 @@ function generatePizzaData(pizza) {
         id: pizza._id,
         name: pizza.name,
         price: pizza.price,
-        image: pizza.image
+        image: pizza.image,
+        type: pizza.type
     }
 }
 
@@ -188,6 +225,42 @@ sweetsSchema.statics.getSweets = function () {
                 });
             }
             resolve(sweets);
+        });
+    });
+};
+
+sweetsSchema.statics.getSweetById = function (id) {
+    return new Promise((resolve, reject) => {
+        let object;
+        SweetsDataSchema.findOne({_id: id}, function (err, data) {
+            if (err) {
+                return new Error(err)
+            } else {
+                object = generateSweetsData(data);
+            }
+        });
+        resolve(object)
+    });
+};
+
+sweetsSchema.statics.editSweetById = function (data) {
+    return new Promise((resolve, reject) => {
+        let result;
+        SweetsDataSchema.findOne({_id: data.id}, function (err, object) {
+            if (err) {
+                return new Error(err)
+            } else {
+                for (const key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        if ((key !== 'id' || key !== '_id') && !!object[key] && key !== 'type') {
+                            object[key] = data[key];
+                        }
+                    }
+                }
+                object.save();
+                result = true;
+            }
+            resolve(result)
         });
     });
 };
@@ -223,7 +296,8 @@ function generateSweetsData(sweet) {
         id: sweet._id,
         name: sweet.name,
         price: sweet.price,
-        image: sweet.image
+        image: sweet.image,
+        type: sweet.type
     }
 }
 
@@ -244,6 +318,43 @@ iceCreamSchema.statics.getIceCreams = function () {
         });
     });
 };
+
+iceCreamSchema.statics.getIceCreamById = function (id) {
+    return new Promise((resolve, reject) => {
+        let object;
+        IceCreamDataSchema.findOne({_id: id}, function (err, data) {
+            if (err) {
+                return new Error(err)
+            } else {
+                object = generateIceCreamData(data);
+            }
+        });
+        resolve(object)
+    });
+};
+
+iceCreamSchema.statics.editIceCreamById = function (data) {
+    return new Promise((resolve, reject) => {
+        let result;
+        IceCreamDataSchema.findOne({_id: data.id}, function (err, object) {
+            if (err) {
+                return new Error(err)
+            } else {
+                for (const key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        if ((key !== 'id' || key !== '_id') && !!object[key] && key !== 'type') {
+                            object[key] = data[key];
+                        }
+                    }
+                }
+                object.save();
+                result = true;
+            }
+            resolve(result)
+        });
+    });
+};
+
 
 iceCreamSchema.statics.removeIceCream = async function (id) {
     return new Promise(async (resolve, reject) => {
@@ -276,7 +387,8 @@ function generateIceCreamData(iceCream) {
         id: iceCream._id,
         name: iceCream.name,
         price: iceCream.price,
-        image: iceCream.image
+        image: iceCream.image,
+        type: iceCream.type
     }
 }
 
@@ -286,23 +398,23 @@ const IceCream = mongoose.model('IceCream', iceCreamSchema);
 
 
 const defaultPizzasData = [
-    {name: 'Domino', price: '70 UAH', image: 'domino'},
-    {name: 'Amigo', price: '50 UAH', image: 'amigo'},
-    {name: 'Deluxe', price: '100 UAH', image: 'deluxe'},
-    {name: 'Meat', price: '150 UAH', image: 'meat'}
+    {name: 'Domino', price: '70 UAH', image: 'domino', type: 'pizza'},
+    {name: 'Amigo', price: '50 UAH', image: 'amigo', type: 'pizza'},
+    {name: 'Deluxe', price: '100 UAH', image: 'deluxe', type: 'pizza'},
+    {name: 'Meat', price: '150 UAH', image: 'meat', type: 'pizza'}
 ];
 const defaultSweetsData = [
-    {name: 'Cheesecake', price: '50 UAH', image: 'cheesecake'},
-    {name: 'Cake', price: '50 UAH', image: 'cake'},
-    {name: 'Pudding', price: '100 UAH', image: 'pudding'},
-    {name: 'Souffle', price: '150 UAH', image: 'souffle'}
+    {name: 'Cheesecake', price: '50 UAH', image: 'cheesecake', type: 'sweet'},
+    {name: 'Cake', price: '50 UAH', image: 'cake', type: 'sweet'},
+    {name: 'Pudding', price: '100 UAH', image: 'pudding', type: 'sweet'},
+    {name: 'Souffle', price: '150 UAH', image: 'souffle', type: 'sweet'}
 ];
 
 const defaultIceCreamsData = [
-    {name: 'Mix', price: '150 UAH', image: 'mix'},
-    {name: 'Banana', price: '50 UAH', image: 'banana'},
-    {name: 'Apple', price: '50 UAH', image: 'apple'},
-    {name: 'Orange', price: '50 UAH', image: 'orange'}
+    {name: 'Mix', price: '150 UAH', image: 'mix', type: 'iceCream'},
+    {name: 'Banana', price: '50 UAH', image: 'banana', type: 'iceCream'},
+    {name: 'Apple', price: '50 UAH', image: 'apple', type: 'iceCream'},
+    {name: 'Orange', price: '50 UAH', image: 'orange', type: 'iceCream'}
 ];
 
 

@@ -9,7 +9,8 @@ const iceCreamDataSchema = new Schema({
         required: true
     },
     price: String,
-    image: String
+    image: String,
+    type: String
 });
 
 exports.IceCreamDataSchema = mongoose.model('IceCreamDataSchema', iceCreamDataSchema);

@@ -9,7 +9,8 @@ const pizzaDataSchema = new Schema({
         required: true
     },
     price: String,
-    image: String
+    image: String,
+    type: String
 });
 
 exports.PizzaDataSchema = mongoose.model('PizzaDataSchema', pizzaDataSchema);
