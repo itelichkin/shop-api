@@ -9,7 +9,7 @@
     }
   },
   "mongoose": {
-    "uri": "mongodb://zahars:Icq346361552@ds131800.mlab.com:31800/humanres",
+    "uri": "mongodb://administrator:qwerty2018@ds247270.mlab.com:47270/shop-data-base",
     "server": {
       "socketOptions": {
         "keepAlive": 1
