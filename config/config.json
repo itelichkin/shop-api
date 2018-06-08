@@ -1,0 +1,28 @@
+{
+  "port": 3000,
+  "mongooseTest": {
+    "uri": "mongodb://localhost/observatory",
+    "server": {
+      "socketOptions": {
+        "keepAlive": 1
+      }
+    }
+  },
+  "mongoose": {
+    "uri": "mongodb://zahars:Icq346361552@ds131800.mlab.com:31800/humanres",
+    "server": {
+      "socketOptions": {
+        "keepAlive": 1
+      }
+    }
+  },
+  "session": {
+    "secret": "KillerIsJim",
+    "key": "sid",
+    "cookie": {
+      "path": "/",
+      "httpOnly": true,
+      "maxAge": null
+    }
+  }
+}
