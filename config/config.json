@@ -1,13 +1,5 @@
 {
   "port": 3000,
-  "mongooseTest": {
-    "uri": "mongodb://localhost/observatory",
-    "server": {
-      "socketOptions": {
-        "keepAlive": 1
-      }
-    }
-  },
   "mongoose": {
     "uri": "mongodb://administrator:qwerty2018@ds247270.mlab.com:47270/shop-data-base",
     "server": {

@@ -1,7 +1,7 @@
 {
-  "name": "departments-api",
+  "name": "shop-api",
   "version": "1.0.0",
-  "description": "Departments",
+  "description": "Shop",
   "private": true,
   "scripts": {
     "start": "node server.js"
@@ -30,9 +30,5 @@
   },
   "devDependencies": {
     "@types/express": "4.11.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/itelichkin/departments-api"
   }
 }
